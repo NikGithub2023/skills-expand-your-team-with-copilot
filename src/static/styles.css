@@ -664,3 +664,147 @@ footer {
 #logout-button:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
+
+/* Social Sharing Buttons */
+.share-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.share-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
+  letter-spacing: 0.3px;
+}
+
+.twitter-share {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.twitter-share:hover {
+  background-color: #333333;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.instagram-share {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff;
+}
+
+.instagram-share:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.share-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Update activity-card-actions to flex column */
+.activity-card-actions {
+  margin-top: auto;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Instagram Share Dialog */
+.instagram-share-content {
+  max-width: 500px;
+}
+
+.share-text-container {
+  margin: 15px 0;
+}
+
+#instagram-share-text {
+  width: 100%;
+  min-height: 120px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  resize: vertical;
+  background-color: var(--background);
+}
+
+.instagram-share-instructions {
+  background-color: var(--info-light);
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+}
+
+.instagram-share-instructions ol {
+  margin: 8px 0 0 20px;
+  padding: 0;
+}
+
+.instagram-share-instructions li {
+  margin: 5px 0;
+  color: var(--text-primary);
+}
+
+.instagram-share-instructions p {
+  margin: 0 0 5px 0;
+  color: var(--info);
+  font-weight: bold;
+}
+
+.instagram-share-content button {
+  margin-top: 10px;
+}
+
+.primary-button {
+  background-color: var(--primary);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.primary-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.secondary-button {
+  background-color: var(--border);
+  color: var(--text-primary);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-right: 10px;
+}
+
+.secondary-button:hover {
+  background-color: var(--border-focus);
+}
