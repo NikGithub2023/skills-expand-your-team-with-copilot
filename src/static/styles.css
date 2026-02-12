@@ -680,7 +680,7 @@ footer {
   justify-content: center;
   gap: 5px;
   padding: 10px 14px;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
   border-radius: 12px;
   border: none;
@@ -714,7 +714,6 @@ footer {
 }
 
 .instagram-share:hover {
-  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 4px 12px rgba(220, 39, 67, 0.4);
 }
@@ -738,7 +737,7 @@ footer {
   .share-button {
     padding: 10px 12px;
     border-radius: 14px;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     letter-spacing: 0.3px;
   }
   
