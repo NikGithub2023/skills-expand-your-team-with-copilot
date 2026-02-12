@@ -166,13 +166,13 @@ initial_activities = {
     },
     "Manga Maniacs": {
         "description": "Explore the fantastic stories of the most interesting characters from Japanese Manga (graphic novels).",
-        "schedule": "Tuesdays, 7:00 PM - 8:00 PM",
+        "schedule": "Tuesdays, 8:00 PM - 9:00 PM",
         "schedule_details": {
             "days": ["Tuesday"],
-            "start_time": "19:00",
-            "end_time": "20:00"
+            "start_time": "20:00",
+            "end_time": "21:00"
         },
-        "max_participants": 15,
+        "max_participants": 20,
         "participants": []
     }
 }
