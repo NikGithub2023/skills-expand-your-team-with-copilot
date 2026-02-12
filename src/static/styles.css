@@ -668,26 +668,29 @@ footer {
 /* Social Sharing Buttons */
 .share-buttons {
   display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 10px;
+  margin-bottom: 10px;
   width: 100%;
+  justify-content: center;
 }
 
 .share-button {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 6px 10px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 4px;
+  gap: 5px;
+  padding: 10px 14px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: none;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  min-width: 48px;
+  min-height: 44px;
 }
 
 .twitter-share {
@@ -696,26 +699,54 @@ footer {
 }
 
 .twitter-share:hover {
-  background-color: #333333;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #1a1a1a;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.twitter-share:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .instagram-share {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   color: #ffffff;
 }
 
 .instagram-share:hover {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  opacity: 0.9;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(220, 39, 67, 0.4);
+}
+
+.instagram-share:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .share-button svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Mobile optimization for iPhone */
+@media (max-width: 768px) {
+  .share-buttons {
+    gap: 8px;
+  }
+  
+  .share-button {
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 0.65rem;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .share-button svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* Update activity-card-actions to flex column */
