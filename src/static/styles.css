@@ -765,7 +765,7 @@ footer {
   flex-shrink: 0;
 }
 
-/* Mobile optimization for iPhone */
+/* Mobile and tablet optimization */
 @media (max-width: 768px) {
   .share-buttons {
     gap: 8px;
@@ -774,7 +774,6 @@ footer {
   .share-button {
     padding: 10px 12px;
     border-radius: 14px;
-    font-size: 0.75rem;
     letter-spacing: 0.3px;
   }
   
