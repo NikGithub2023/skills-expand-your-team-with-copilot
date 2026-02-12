@@ -887,7 +887,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Social sharing functions
   function shareOnTwitter(activityName, details) {
-    const formattedSchedule = formatSchedule(details);
     const text = `Check out ${activityName} at Mergington High School! ${details.description}`;
     const hashtags = "MergingtonHS,ExtracurricularActivities";
     const url = window.location.href;
@@ -961,6 +960,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const textarea = document.getElementById("instagram-share-text");
         navigator.clipboard.writeText(textarea.value).then(() => {
           copyAgainBtn.textContent = "✓ Copied!";
+          setTimeout(() => {
+            copyAgainBtn.textContent = "Copy Text Again";
+          }, 2000);
+        }).catch((err) => {
+          console.error('Failed to copy text: ', err);
+          copyAgainBtn.textContent = "Copy Failed";
           setTimeout(() => {
             copyAgainBtn.textContent = "Copy Text Again";
           }, 2000);
