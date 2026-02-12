@@ -621,6 +621,20 @@ document.addEventListener("DOMContentLoaded", () => {
         </ul>
       </div>
       <div class="activity-card-actions">
+        <div class="share-buttons">
+          <button class="share-button twitter-share" data-activity="${name}" title="Share on Twitter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            Twitter
+          </button>
+          <button class="share-button instagram-share" data-activity="${name}" title="Share on Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            Instagram
+          </button>
+        </div>
         ${
           currentUser
             ? `
@@ -653,6 +667,22 @@ document.addEventListener("DOMContentLoaded", () => {
           openRegistrationModal(name);
         });
       }
+    }
+
+    // Add click handlers for share buttons
+    const twitterShareButton = activityCard.querySelector(".twitter-share");
+    const instagramShareButton = activityCard.querySelector(".instagram-share");
+
+    if (twitterShareButton) {
+      twitterShareButton.addEventListener("click", () => {
+        shareOnTwitter(name, details);
+      });
+    }
+
+    if (instagramShareButton) {
+      instagramShareButton.addEventListener("click", () => {
+        shareOnInstagram(name, details);
+      });
     }
 
     activitiesList.appendChild(activityCard);
@@ -935,6 +965,112 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error signing up:", error);
     }
   });
+
+  // Social sharing functions
+  function shareOnTwitter(activityName, details) {
+    const text = `Check out ${activityName} at Mergington High School! ${details.description}`;
+    const hashtags = "MergingtonHS,ExtracurricularActivities";
+    const url = window.location.href;
+    
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&hashtags=${encodeURIComponent(hashtags)}&url=${encodeURIComponent(url)}`;
+    
+    window.open(twitterUrl, '_blank', 'width=550,height=420');
+  }
+
+  function shareOnInstagram(activityName, details) {
+    // Instagram doesn't support direct web sharing with pre-filled text
+    // We'll show a helpful message with copy-to-clipboard functionality
+    const formattedSchedule = formatSchedule(details);
+    const shareText = `Check out ${activityName} at Mergington High School!\n\n${details.description}\n\nSchedule: ${formattedSchedule}\n\n#MergingtonHS #ExtracurricularActivities`;
+    
+    // Copy text to clipboard
+    navigator.clipboard.writeText(shareText).then(() => {
+      showInstagramShareDialog(shareText);
+    }).catch(() => {
+      // Fallback if clipboard API is not available
+      showInstagramShareDialog(shareText);
+    });
+  }
+
+  function showInstagramShareDialog(shareText) {
+    // Create or get the Instagram share dialog
+    let instagramDialog = document.getElementById("instagram-share-dialog");
+    if (!instagramDialog) {
+      instagramDialog = document.createElement("div");
+      instagramDialog.id = "instagram-share-dialog";
+      instagramDialog.className = "modal hidden";
+      instagramDialog.innerHTML = `
+        <div class="modal-content instagram-share-content">
+          <span class="close-instagram-share">&times;</span>
+          <h3>Share on Instagram</h3>
+          <p>Instagram doesn't support direct web sharing. We've copied the text below to your clipboard!</p>
+          <div class="share-text-container">
+            <textarea id="instagram-share-text" readonly></textarea>
+          </div>
+          <div class="instagram-share-instructions">
+            <p><strong>To share:</strong></p>
+            <ol>
+              <li>Open the Instagram app on your phone</li>
+              <li>Create a new post or story</li>
+              <li>Paste the copied text (already in your clipboard!)</li>
+              <li>Add a photo of the activity if you have one</li>
+            </ol>
+          </div>
+          <button id="copy-again-button" class="secondary-button">Copy Text Again</button>
+          <button id="close-instagram-dialog" class="primary-button">Got It!</button>
+        </div>
+      `;
+      document.body.appendChild(instagramDialog);
+
+      // Close button handlers
+      const closeBtn = instagramDialog.querySelector(".close-instagram-share");
+      const closeDialogBtn = instagramDialog.querySelector("#close-instagram-dialog");
+      const copyAgainBtn = instagramDialog.querySelector("#copy-again-button");
+
+      const closeDialog = () => {
+        instagramDialog.classList.remove("show");
+        setTimeout(() => {
+          instagramDialog.classList.add("hidden");
+        }, 300);
+      };
+
+      closeBtn.addEventListener("click", closeDialog);
+      closeDialogBtn.addEventListener("click", closeDialog);
+
+      copyAgainBtn.addEventListener("click", () => {
+        const textarea = document.getElementById("instagram-share-text");
+        navigator.clipboard.writeText(textarea.value).then(() => {
+          copyAgainBtn.textContent = "✓ Copied!";
+          setTimeout(() => {
+            copyAgainBtn.textContent = "Copy Text Again";
+          }, 2000);
+        }).catch((err) => {
+          console.error('Failed to copy text: ', err);
+          copyAgainBtn.textContent = "Copy Failed";
+          setTimeout(() => {
+            copyAgainBtn.textContent = "Copy Text Again";
+          }, 2000);
+        });
+      });
+
+      // Close when clicking outside
+      instagramDialog.addEventListener("click", (event) => {
+        if (event.target === instagramDialog) {
+          closeDialog();
+        }
+      });
+    }
+
+    // Set the share text
+    const textarea = document.getElementById("instagram-share-text");
+    textarea.value = shareText;
+
+    // Show the dialog
+    instagramDialog.classList.remove("hidden");
+    setTimeout(() => {
+      instagramDialog.classList.add("show");
+    }, 10);
+  }
 
   // Expose filter functions to window for future UI control
   window.activityFilters = {
